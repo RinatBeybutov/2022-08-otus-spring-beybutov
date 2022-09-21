@@ -4,17 +4,12 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="personDao" class="ru.otus.spring.dao.PersonDaoSimple">
-        <property name="defaultAge" value="28"/>
-    </bean>
-
-    <bean id="personService" class="ru.otus.spring.service.PersonServiceImpl">
-        <!--<constructor-arg name="dao" ref="personDao"/>-->
-        <property name="dao" ref="personDao"/>
-    </bean>
-
     <bean id="CSVConfig" class="ru.otus.spring.config.CSVConfig">
         <constructor-arg name="csvPath" value="/questions.csv"/>
+    </bean>
+
+    <bean id="Starter" class="ru.otus.spring.service.Starter">
+        <constructor-arg name="csvConfig" ref="CSVConfig"/>
     </bean>
 
 </beans>
