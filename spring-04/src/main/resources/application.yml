@@ -3,12 +3,11 @@ spring:
     basename: "i18n/appmessages"
     encoding: "UTF-8"
 
-server:
-  port: 8080
-
 application:
   countQuestionForPass: 3
-  locale: ru_RU
+  locale: en
+  engLocalizationFile:  "/questionsEn.csv"
+  ruLocalizationFile: "/questionsRu.csv"
 
 
 #https://involta.ru/tools/decoder/

@@ -12,9 +12,8 @@ public class Starter {
 
   private final Printer printer;
   private final AnswerReader answerReader;
-  private final AppProps appProps;
+  private final AppProps properties;
   private final MessageSource messageSource;
-
   private final QuestionReader questionReader;
 
   @Autowired
@@ -22,10 +21,9 @@ public class Starter {
       QuestionReader questionReader) {
     this.printer = printer;
     this.answerReader = answerReader;
-    this.appProps = props;
+    this.properties = props;
     this.messageSource = messageSource;
     this.questionReader = questionReader;
-    start();
   }
 
   public void start() {
@@ -36,20 +34,24 @@ public class Starter {
   }
 
   private String enterName() {
-    printer.print("Enter name and surname:");
-    return answerReader.read();
+    printer.print(messageSource.getMessage("greetings", null, properties.getLocale()));
+    return answerReader.readAnswer();
   }
 
   private void printResult(int countCorrectAnswers, String name) {
-    printer.print(name + ", you have " + countCorrectAnswers + " correct answers");
-    printer.print(countCorrectAnswers >= appProps.getCountQuestionForPass() ? "You passed" : "You failed");
+    String you = messageSource.getMessage("you", null, properties.getLocale());
+    String correctAnswers = messageSource.getMessage("correctAnswers", null,properties.getLocale());
+    String passed = messageSource.getMessage("passed", null,properties.getLocale());
+    String failed = messageSource.getMessage("failed", null,properties.getLocale());
+    printer.print(name + ", " + you + " " + countCorrectAnswers + " " + correctAnswers);
+    printer.print(countCorrectAnswers >= properties.getCountQuestionForPass() ? passed : failed);
   }
 
   private int askQuestions(List<Question> questions) {
     int correctAnswers = 0;
     for (Question q : questions) {
       printer.print(q.toString());
-      String answer = answerReader.read();
+      String answer = answerReader.readAnswer();
       if(answer.equals(q.getCorrectAnswer())) {
         correctAnswers++;
       }

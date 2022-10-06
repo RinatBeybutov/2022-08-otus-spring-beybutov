@@ -38,6 +38,6 @@ public class Question {
 
   @Override
   public String toString() {
-    return "Question #" + id + ": " + question + "\n" + String.join("\n", answers);
+    return "#" + id + ": " + question + "\n" + String.join("\n", answers);
   }
 }

@@ -12,7 +12,7 @@ public class ConsoleReader implements AnswerReader{
   }
 
   @Override
-  public String read() {
+  public String readAnswer() {
     return in.nextLine();
   }
 }
