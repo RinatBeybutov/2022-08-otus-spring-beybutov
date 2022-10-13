@@ -2,11 +2,11 @@ package ru.otus.service;
 
 import java.io.PrintStream;
 
-public class PrinterImpl implements Printer {
+public class TextPrinterImpl implements TextPrinter {
 
   private final PrintStream output;
 
-  public PrinterImpl(PrintStream output) {
+  public TextPrinterImpl(PrintStream output) {
     this.output = output;
   }
 

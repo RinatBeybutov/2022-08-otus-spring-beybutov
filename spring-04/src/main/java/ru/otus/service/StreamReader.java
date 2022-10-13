@@ -3,11 +3,11 @@ package ru.otus.service;
 import java.io.InputStream;
 import java.util.Scanner;
 
-public class ConsoleReader implements AnswerReader{
+public class StreamReader implements AnswerReader{
 
   private final Scanner in;
 
-  public ConsoleReader(InputStream inputStream) {
+  public StreamReader(InputStream inputStream) {
     this.in = new Scanner(inputStream);
   }
 

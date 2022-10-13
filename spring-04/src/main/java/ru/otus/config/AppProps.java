@@ -8,23 +8,14 @@ public class AppProps {
 
   private int countQuestionForPass;
   private Locale locale;
-  private String engLocalizationFile;
-  private String ruLocalizationFile;
+  private String localizationFile;
 
-  public String getEngLocalizationFile() {
-    return engLocalizationFile;
+  public String getLocalizationFile() {
+    return localizationFile;
   }
 
-  public void setEngLocalizationFile(String engLocalizationFile) {
-    this.engLocalizationFile = engLocalizationFile;
-  }
-
-  public String getRuLocalizationFile() {
-    return ruLocalizationFile;
-  }
-
-  public void setRuLocalizationFile(String ruLocalizationFile) {
-    this.ruLocalizationFile = ruLocalizationFile;
+  public void setLocalizationFile(String localizationFile) {
+    this.localizationFile = localizationFile;
   }
 
   public static final int COUNT_QUESTIONS = 5;

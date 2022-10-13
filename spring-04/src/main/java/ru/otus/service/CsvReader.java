@@ -43,7 +43,7 @@ public class CsvReader implements QuestionReader {
 
   private String[] readCsv(){
     byte[] bytes;
-    String pathCsvFile = properties.getLocale().toString().equals("ru_RU") ? properties.getRuLocalizationFile() : properties.getEngLocalizationFile();
+    String pathCsvFile = properties.getLocalizationFile();
     try {
       bytes = SpringBootDemo.class.getResourceAsStream(pathCsvFile).readAllBytes();
     } catch (IOException e) {

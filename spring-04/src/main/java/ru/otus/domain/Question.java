@@ -3,7 +3,6 @@ package ru.otus.domain;
 import java.util.List;
 
 public class Question {
-
   private final int id;
   private final String question;
   private final List<String> answers;
@@ -34,10 +33,5 @@ public class Question {
 
   public String getCorrectAnswer() {
     return correctAnswer;
-  }
-
-  @Override
-  public String toString() {
-    return "#" + id + ": " + question + "\n" + String.join("\n", answers);
   }
 }

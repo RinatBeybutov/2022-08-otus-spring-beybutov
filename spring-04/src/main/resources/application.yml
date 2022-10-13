@@ -6,8 +6,7 @@ spring:
 application:
   countQuestionForPass: 3
   locale: en
-  engLocalizationFile:  "/questionsEn.csv"
-  ruLocalizationFile: "/questionsRu.csv"
+  localizationFile:  "/questionsEn.csv"
 
 
 #https://involta.ru/tools/decoder/

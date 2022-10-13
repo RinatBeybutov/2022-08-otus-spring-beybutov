@@ -1,6 +1,6 @@
 package ru.otus.service;
 
-public interface Printer {
+public interface TextPrinter {
 
   void print(String stringToPrint);
 }
