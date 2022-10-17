@@ -3,7 +3,7 @@ package ru.otus.spring.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import ru.otus.spring.service.AnswerReader;
-import ru.otus.spring.service.ConsoleReader;
+import ru.otus.spring.service.StreamReader;
 import ru.otus.spring.service.Printer;
 import ru.otus.spring.service.PrinterImpl;
 
@@ -17,7 +17,7 @@ public class BeansConfig {
 
   @Bean
   public AnswerReader answerReader() {
-    return new ConsoleReader(System.in);
+    return new StreamReader(System.in);
   }
 
 }

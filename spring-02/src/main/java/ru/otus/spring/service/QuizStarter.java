@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import ru.otus.spring.domain.Question;
 
 @Service
-public class Starter {
+public class QuizStarter {
 
   private final QuestionReader questionReader;
   private final Printer printer;
@@ -15,7 +15,7 @@ public class Starter {
   private final int passAnswers;
 
   @Autowired
-  public Starter(QuestionReader questionReader, Printer printer, AnswerReader answerReader,
+  public QuizStarter(QuestionReader questionReader, Printer printer, AnswerReader answerReader,
       @Value("${countQForPass}") int passAnswers) {
     this.questionReader = questionReader;
     this.printer = printer;
