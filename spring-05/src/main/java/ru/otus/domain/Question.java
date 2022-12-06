@@ -1,7 +1,9 @@
 package ru.otus.domain;
 
 import java.util.List;
+import lombok.EqualsAndHashCode;
 
+@EqualsAndHashCode
 public class Question {
   private final int id;
   private final String question;
