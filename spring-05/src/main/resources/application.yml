@@ -1,0 +1,15 @@
+spring:
+  messages:
+    basename: "i18n/appmessages"
+    encoding: "UTF-8"
+  shell:
+    interactive:
+      enabled: false
+
+application:
+  countQuestionForPass: 3
+  locale: en
+  localizationFile:  "/questionsEn.csv"
+
+
+#https://involta.ru/tools/decoder/
