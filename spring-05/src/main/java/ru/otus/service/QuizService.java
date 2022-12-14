@@ -20,7 +20,9 @@ public class QuizService {
 
   private final AppProps properties;
 
-  public int askQuestions(List<Question> questions) {
+  private final QuestionReader questionReader;
+
+  private int askQuestions(List<Question> questions) {
     int correctAnswers = 0;
     for (Question q : questions) {
       textPrinter.print(ConverterQuestionToString.convert(q));
@@ -32,12 +34,18 @@ public class QuizService {
     return correctAnswers;
   }
 
-  public void printResult(int countCorrectAnswers, Student student) {
+  private void printResult(int countCorrectAnswers, Student student) {
     String you = messageSource.getMessage("you", null, properties.getLocale());
     String correctAnswers = messageSource.getMessage("correctAnswers", null,properties.getLocale());
     String passed = messageSource.getMessage("passed", null,properties.getLocale());
     String failed = messageSource.getMessage("failed", null,properties.getLocale());
     textPrinter.print(student.getName() + " " + student.getSurname() + ", " + you + " " + countCorrectAnswers + " " + correctAnswers);
     textPrinter.print(countCorrectAnswers >= properties.getCountQuestionForPass() ? passed : failed);
+  }
+
+  public void start(Student student) {
+    List<Question> questions = questionReader.read();
+    int countCorrectAnswers = askQuestions(questions);
+    printResult(countCorrectAnswers, student);
   }
 }

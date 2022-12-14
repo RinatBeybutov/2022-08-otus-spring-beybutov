@@ -1,6 +1,5 @@
 package ru.otus.service;
 
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.shell.Availability;
@@ -9,29 +8,21 @@ import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellMethodAvailability;
 import org.springframework.shell.standard.ShellOption;
 import ru.otus.config.AppProps;
-import ru.otus.domain.Question;
 import ru.otus.domain.Student;
 
 @ShellComponent
 public class QuizStarter {
 
-  private final TextPrinter textPrinter;
-  private final AnswerReader answerReader;
   private final AppProps properties;
   private final MessageSource messageSource;
-  private final QuestionReader questionReader;
-
   private final QuizService quizService;
   private Student student = new Student("", "");
 
   @Autowired
-  public QuizStarter(TextPrinter textPrinter, AnswerReader answerReader, MessageSource messageSource, AppProps props,
-      QuestionReader questionReader, QuizService quizService) {
-    this.textPrinter = textPrinter;
-    this.answerReader = answerReader;
+  public QuizStarter(MessageSource messageSource, AppProps props,
+      QuizService quizService) {
     this.properties = props;
     this.messageSource = messageSource;
-    this.questionReader = questionReader;
     this.quizService = quizService;
   }
 
@@ -45,10 +36,7 @@ public class QuizStarter {
   @ShellMethod(value = "Starting quiz command.", key = {"s", "start"})
   @ShellMethodAvailability("isLoggedCheck")
   public void start() {
-
-    List<Question> questions = questionReader.read();
-    int countCorrectAnswers = quizService.askQuestions(questions);
-    quizService.printResult(countCorrectAnswers, student);
+    quizService.start(student);
     student = null;
   }
 
