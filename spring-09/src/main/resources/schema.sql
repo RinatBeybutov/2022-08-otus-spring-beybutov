@@ -1,12 +1,12 @@
 DROP TABLE IF EXISTS PERSONS;
-CREATE TABLE PERSONS(ID BIGINT PRIMARY KEY, NAME VARCHAR(255));
+CREATE TABLE PERSONS(ID IDENTITY PRIMARY KEY, NAME VARCHAR(255));
 
 drop table if exists genres;
-create table genres(ID bigint primary key, name varchar(255));
+create table genres(ID IDENTITY primary key, name varchar(255));
 
 drop table if exists books;
 create table books(
-ID bigint primary key,
+ID IDENTITY primary key,
 name varchar(255),
 id_author bigint,
 id_genre bigint,

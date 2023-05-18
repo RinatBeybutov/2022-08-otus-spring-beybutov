@@ -8,14 +8,14 @@ import java.util.Map;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.stereotype.Repository;
-import ru.otus.dto.PersonDto;
+import ru.otus.domain.Author;
 
 @Repository
-public class PersonDaoJdbc implements PersonDao {
+public class AuthorDaoJdbc implements AuthorDao {
 
     private final NamedParameterJdbcOperations namedParameterJdbcOperations;
 
-    public PersonDaoJdbc(NamedParameterJdbcOperations namedParameterJdbcOperations)
+    public AuthorDaoJdbc(NamedParameterJdbcOperations namedParameterJdbcOperations)
     {
         this.namedParameterJdbcOperations = namedParameterJdbcOperations;
     }
@@ -28,22 +28,22 @@ public class PersonDaoJdbc implements PersonDao {
     }
 
     @Override
-    public void insert(PersonDto personDto) {
-        namedParameterJdbcOperations.update("insert into persons (id, name) values (:id, :name)",
-                Map.of("id", personDto.getId(), "name", personDto.getName()));
+    public void insert(Author author) {
+        namedParameterJdbcOperations.update("insert into persons (name) values (:name)",
+                Map.of( "name", author.getName()));
     }
 
     @Override
-    public PersonDto getById(long id) {
+    public Author getById(long id) {
         Map<String, Object> params = Collections.singletonMap("id", id);
         return namedParameterJdbcOperations.queryForObject(
-                "select id, name from persons where id = :id", params, new PersonRowMapper()
+                "select id, name from persons where id = :id", params, new AuthorRowMapper()
         );
     }
 
     @Override
-    public List<PersonDto> getAll() {
-        return namedParameterJdbcOperations.getJdbcOperations().query("select id, name from persons", new PersonRowMapper());
+    public List<Author> getAll() {
+        return namedParameterJdbcOperations.getJdbcOperations().query("select id, name from persons", new AuthorRowMapper());
     }
 
     @Override
@@ -55,18 +55,18 @@ public class PersonDaoJdbc implements PersonDao {
     }
 
     @Override
-    public PersonDto getByName(String author) {
+    public Author getByName(String author) {
         return namedParameterJdbcOperations.queryForObject("select * from persons where name = :name",
-            Map.of("name", author), new PersonRowMapper());
+            Map.of("name", author), new AuthorRowMapper());
     }
 
-    private static class PersonRowMapper implements RowMapper<PersonDto> {
+    private static class AuthorRowMapper implements RowMapper<Author> {
 
         @Override
-        public PersonDto mapRow(ResultSet resultSet, int i) throws SQLException {
+        public Author mapRow(ResultSet resultSet, int i) throws SQLException {
             long id = resultSet.getLong("id");
             String name = resultSet.getString("name");
-            return new PersonDto(id, name);
+            return new Author(id, name);
         }
     }
 }

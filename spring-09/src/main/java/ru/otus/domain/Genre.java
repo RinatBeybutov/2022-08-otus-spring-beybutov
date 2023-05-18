@@ -1,4 +1,4 @@
-package ru.otus.dto;
+package ru.otus.domain;
 
 
 import lombok.Data;
@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 
 @Data
 @RequiredArgsConstructor
-public class GenreDto {
+public class Genre {
   private final long id;
   private final String name;
 }

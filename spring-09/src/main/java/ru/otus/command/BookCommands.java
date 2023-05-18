@@ -1,19 +1,20 @@
-package ru.otus.service;
+package ru.otus.command;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
-import ru.otus.domain.Book;
+import ru.otus.dto.BookDto;
+import ru.otus.service.BookService;
 
 @ShellComponent
-public class Commands {
+public class BookCommands {
 
-  private BookService bookService;
+  private final BookService bookService;
 
   @Autowired
-  public Commands(BookService bookService) {
+  public BookCommands(BookService bookService) {
     this.bookService = bookService;
   }
 
@@ -21,26 +22,20 @@ public class Commands {
   public String insertBook(@ShellOption String name,
       @ShellOption String author,
       @ShellOption String genre) {
-    bookService.save(new Book(name, author, genre));
+    bookService.save(new BookDto(name, author, genre));
     return "книга сохранена!";
   }
 
   @ShellMethod(value = "get all books", key = {"getAllBooks", "ga"})
   public String getAllBooks() {
-    List<Book> books = bookService.getAllBooks();
-    StringBuilder builder = new StringBuilder();
-    books.forEach(book -> {
-      builder.append(book.getName() + "-"+ "\t");
-      builder.append(book.getGenre() + "-"+ "\t");
-      builder.append(book.getAuthor() + "-"+ "\n");
-    });
-    return builder.toString();
+    List<BookDto> books = bookService.getAllBooks();
+    return BookConverter.BookDtosToStrings(books);
   }
 
   @ShellMethod(value = "get book by id", key = {"getBookById", "gi"})
   public String getBookById(@ShellOption String name) {
-    Book book = bookService.getBook(name);
-    return book.getName() + "\t" + book.getAuthor() + "\t" + book.getGenre();
+    BookDto book = bookService.getBook(name);
+    return BookConverter.BookDtoToString(book);
   }
 
   @ShellMethod(value = "update book", key = {"updateBook", "u"})
@@ -55,5 +50,19 @@ public class Commands {
   public String deleteBook(@ShellOption String name) {
     bookService.delete(name);
     return "книга удалена!";
+  }
+
+  private static class BookConverter {
+    public static String BookDtoToString(BookDto bookDto) {
+      return String.format("%s - %s - %s", bookDto.getName(), bookDto.getAuthor(), bookDto.getGenre());
+    }
+
+    public static String BookDtosToStrings(List<BookDto> books ){
+      StringBuilder builder = new StringBuilder();
+      books.forEach(book -> {
+        builder.append(BookDtoToString(book) + "\n");
+      });
+      return builder.toString();
+    }
   }
 }

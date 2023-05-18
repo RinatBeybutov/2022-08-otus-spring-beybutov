@@ -1,13 +1,14 @@
 package ru.otus.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
 public class BookDto {
-  private final long id;
-  private final String name;
-  private final long id_author ;
-  private final long id_genre;
+  private String name;
+  private String author;
+  private String genre;
 }

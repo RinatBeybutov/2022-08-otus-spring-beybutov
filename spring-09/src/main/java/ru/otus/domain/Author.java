@@ -1,11 +1,11 @@
-package ru.otus.dto;
+package ru.otus.domain;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Data
-public class PersonDto {
+public class Author {
     private final long id;
     private final String name;
 }

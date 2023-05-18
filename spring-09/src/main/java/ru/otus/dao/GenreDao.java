@@ -1,17 +1,17 @@
 package ru.otus.dao;
 
 import java.util.List;
-import ru.otus.dto.GenreDto;
+import ru.otus.domain.Genre;
 
 public interface GenreDao {
 
-  List<GenreDto> getAll();
+  List<Genre> getAll();
 
-  void insert(GenreDto bookDto);
+  void insert(Genre genre);
 
-  GenreDto getById(long id);
+  Genre getById(long id);
 
   void deleteById(long id);
 
-  GenreDto getByName(String name);
+  Genre getByName(String name);
 }

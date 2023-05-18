@@ -1,22 +1,21 @@
 package ru.otus.dao;
 
 import java.util.List;
-import ru.otus.dto.PersonDto;
-import ru.otus.dto.BookDto;
+import ru.otus.domain.Book;
 
 public interface BookDao {
 
-  List<BookDto> getAll();
+  List<Book> getAll();
 
-  void insert(BookDto bookDto);
+  void insert(Book book);
 
-  BookDto getById(long id);
+  Book getById(long id);
 
   void deleteById(long id);
 
   int count();
 
-  BookDto getByName(String name);
+  Book getByName(String name);
 
-  void updateByName(BookDto bookDto);
+  void updateByName(Book book);
 }
