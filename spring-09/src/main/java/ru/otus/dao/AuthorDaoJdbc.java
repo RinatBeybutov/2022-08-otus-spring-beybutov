@@ -23,13 +23,13 @@ public class AuthorDaoJdbc implements AuthorDao {
     @Override
     public int count() {
         Integer count = namedParameterJdbcOperations.getJdbcOperations()
-            .queryForObject("select count(*) from persons", Integer.class);
+            .queryForObject("select count(*) from authors", Integer.class);
         return count == null? 0: count;
     }
 
     @Override
     public void insert(Author author) {
-        namedParameterJdbcOperations.update("insert into persons (name) values (:name)",
+        namedParameterJdbcOperations.update("insert into authors (name) values (:name)",
                 Map.of( "name", author.getName()));
     }
 
@@ -37,26 +37,26 @@ public class AuthorDaoJdbc implements AuthorDao {
     public Author getById(long id) {
         Map<String, Object> params = Collections.singletonMap("id", id);
         return namedParameterJdbcOperations.queryForObject(
-                "select id, name from persons where id = :id", params, new AuthorRowMapper()
+                "select id, name from authors where id = :id", params, new AuthorRowMapper()
         );
     }
 
     @Override
     public List<Author> getAll() {
-        return namedParameterJdbcOperations.getJdbcOperations().query("select id, name from persons", new AuthorRowMapper());
+        return namedParameterJdbcOperations.getJdbcOperations().query("select id, name from authors", new AuthorRowMapper());
     }
 
     @Override
     public void deleteById(long id) {
         Map<String, Object> params = Collections.singletonMap("id", id);
         namedParameterJdbcOperations.update(
-                "delete from persons where id = :id", params
+                "delete from authors where id = :id", params
         );
     }
 
     @Override
     public Author getByName(String author) {
-        return namedParameterJdbcOperations.queryForObject("select * from persons where name = :name",
+        return namedParameterJdbcOperations.queryForObject("select * from authors where name = :name",
             Map.of("name", author), new AuthorRowMapper());
     }
 

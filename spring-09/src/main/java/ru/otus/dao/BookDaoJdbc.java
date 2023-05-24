@@ -24,8 +24,8 @@ public class BookDaoJdbc implements BookDao {
   public List<Book> getAll() {
     return namedParameterJdbcOperations.query("select b.name as name, b.id as id, p.id as personId, p.name as personName,"
         + "g.id as genreId, g.name as genreName"
-        + " from books b join persons p on b.id_author = "
-        + " p.id join genres g on b.id_genre = g.id", new BookRowMapper());
+        + " from books b inner join authors p on b.id_author = "
+        + " p.id inner join genres g on b.id_genre = g.id", new BookRowMapper());
   }
 
   @Override
@@ -41,8 +41,8 @@ public class BookDaoJdbc implements BookDao {
     Map<String, Long> params = Map.of("id", id);
     return namedParameterJdbcOperations.queryForObject("select b.name as name, b.id as id, p.id as personId, p.name as personName,"
         + "g.id as genreId, g.name as genreName"
-        + " from books b join persons p on b.id_author = "
-        + " p.id join genres g on b.id_genre = g.id where b.id = :id", params,
+        + " from books b inner join authors p on b.id_author = "
+        + " p.id inner join genres g on b.id_genre = g.id where b.id = :id", params,
         new BookRowMapper());
   }
 
@@ -61,8 +61,8 @@ public class BookDaoJdbc implements BookDao {
   public Book getByName(String name) {
     return namedParameterJdbcOperations.queryForObject("select b.name as name, b.id as id, p.id as personId, p.name as personName,"
         + "g.id as genreId, g.name as genreName"
-        + " from books b join persons p on b.id_author = "
-        + " p.id join genres g on b.id_genre = g.id where b.name = :name",
+        + " from books b inner join authors p on b.id_author = "
+        + " p.id inner join genres g on b.id_genre = g.id where b.name = :name",
         Map.of("name", name), new BookRowMapper());
   }
 

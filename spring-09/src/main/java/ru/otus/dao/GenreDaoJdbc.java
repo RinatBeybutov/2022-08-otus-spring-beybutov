@@ -38,7 +38,7 @@ public class GenreDaoJdbc implements GenreDao {
 
   @Override
   public void deleteById(long id) {
-
+    namedParameterJdbcOperations.update("delete from genres where id = :id", Map.of("id", id));
   }
 
   @Override

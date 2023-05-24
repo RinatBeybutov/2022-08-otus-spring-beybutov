@@ -1,4 +1,4 @@
-package ru.otus.spring.dao;
+package ru.otus.dao;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;

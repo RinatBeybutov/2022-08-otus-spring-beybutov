@@ -1,4 +1,4 @@
-package ru.otus.spring.dao;
+package ru.otus.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
@@ -20,10 +20,10 @@ import ru.otus.domain.Author;
 import ru.otus.domain.Book;
 import ru.otus.domain.Genre;
 import ru.otus.dto.BookDto;
-import ru.otus.service.BookService;
+import ru.otus.service.BookServiceImpl;
 
 @JdbcTest
-@Import(BookService.class)
+@Import(BookServiceImpl.class)
 public class BookServiceTest {
 
   private static final String EXISTED_BOOK_NAME = "War and peace";
@@ -33,7 +33,7 @@ public class BookServiceTest {
   private static final String EXISTED_BOOK_GENRE_2 = "history";
   private static final String NEW_BOOK_NAME = "Bestseller";
   @Autowired
-  private BookService bookService;
+  private BookServiceImpl bookService;
 
   @MockBean
   private BookDaoJdbc bookDaoJdbc;

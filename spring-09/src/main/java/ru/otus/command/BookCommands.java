@@ -5,16 +5,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
+import ru.otus.converter.BookDtoConverter;
 import ru.otus.dto.BookDto;
-import ru.otus.service.BookService;
+import ru.otus.service.BookServiceImpl;
 
 @ShellComponent
 public class BookCommands {
 
-  private final BookService bookService;
+  private final BookServiceImpl bookService;
 
   @Autowired
-  public BookCommands(BookService bookService) {
+  public BookCommands(BookServiceImpl bookService) {
     this.bookService = bookService;
   }
 
@@ -29,13 +30,13 @@ public class BookCommands {
   @ShellMethod(value = "get all books", key = {"getAllBooks", "ga"})
   public String getAllBooks() {
     List<BookDto> books = bookService.getAllBooks();
-    return BookConverter.BookDtosToStrings(books);
+    return BookDtoConverter.bookDtosToStrings(books);
   }
 
   @ShellMethod(value = "get book by id", key = {"getBookById", "gi"})
-  public String getBookById(@ShellOption String name) {
+  public String getBookByName(@ShellOption String name) {
     BookDto book = bookService.getBook(name);
-    return BookConverter.BookDtoToString(book);
+    return BookDtoConverter.bookDtoToString(book);
   }
 
   @ShellMethod(value = "update book", key = {"updateBook", "u"})
@@ -50,19 +51,5 @@ public class BookCommands {
   public String deleteBook(@ShellOption String name) {
     bookService.delete(name);
     return "книга удалена!";
-  }
-
-  private static class BookConverter {
-    public static String BookDtoToString(BookDto bookDto) {
-      return String.format("%s - %s - %s", bookDto.getName(), bookDto.getAuthor(), bookDto.getGenre());
-    }
-
-    public static String BookDtosToStrings(List<BookDto> books ){
-      StringBuilder builder = new StringBuilder();
-      books.forEach(book -> {
-        builder.append(BookDtoToString(book) + "\n");
-      });
-      return builder.toString();
-    }
   }
 }
