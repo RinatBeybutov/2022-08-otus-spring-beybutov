@@ -23,7 +23,7 @@ import ru.otus.dto.BookDto;
 import ru.otus.service.BookServiceImpl;
 
 @JdbcTest
-@Import(BookServiceImpl.class)
+@Import({BookServiceImpl.class, AuthorService.class, GenreService.class})
 public class BookServiceTest {
 
   private static final String EXISTED_BOOK_NAME = "War and peace";
@@ -33,7 +33,7 @@ public class BookServiceTest {
   private static final String EXISTED_BOOK_GENRE_2 = "history";
   private static final String NEW_BOOK_NAME = "Bestseller";
   @Autowired
-  private BookServiceImpl bookService;
+  private BookService bookService;
 
   @MockBean
   private BookDaoJdbc bookDaoJdbc;
