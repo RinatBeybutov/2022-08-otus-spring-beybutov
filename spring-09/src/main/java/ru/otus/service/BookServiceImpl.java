@@ -3,16 +3,13 @@ package ru.otus.service;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import ru.otus.converter.BookDtoConverter;
 import ru.otus.dao.BookDao;
-import ru.otus.dao.GenreDao;
-import ru.otus.dao.AuthorDao;
-import ru.otus.domain.Book;
-import ru.otus.dto.BookDto;
-import ru.otus.domain.Genre;
 import ru.otus.domain.Author;
+import ru.otus.domain.Book;
+import ru.otus.domain.Genre;
+import ru.otus.dto.BookDto;
 
 @Service
 @RequiredArgsConstructor

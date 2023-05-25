@@ -56,7 +56,7 @@ public class AuthorDaoJdbc implements AuthorDao {
 
     @Override
     public Author getByName(String author) {
-        return namedParameterJdbcOperations.queryForObject("select * from authors where name = :name",
+        return namedParameterJdbcOperations.queryForObject("select id, name from authors where name = :name",
             Map.of("name", author), new AuthorRowMapper());
     }
 

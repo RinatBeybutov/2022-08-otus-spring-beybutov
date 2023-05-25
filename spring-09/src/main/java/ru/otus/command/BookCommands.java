@@ -7,15 +7,15 @@ import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
 import ru.otus.converter.BookDtoConverter;
 import ru.otus.dto.BookDto;
-import ru.otus.service.BookServiceImpl;
+import ru.otus.service.BookService;
 
 @ShellComponent
 public class BookCommands {
 
-  private final BookServiceImpl bookService;
+  private final BookService bookService;
 
   @Autowired
-  public BookCommands(BookServiceImpl bookService) {
+  public BookCommands(BookService bookService) {
     this.bookService = bookService;
   }
 
