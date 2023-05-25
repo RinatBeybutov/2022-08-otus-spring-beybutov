@@ -1,10 +1,12 @@
+server:
+  port: 8081
 spring:
   messages:
     basename: "i18n/appmessages"
     encoding: "UTF-8"
   shell:
     interactive:
-      enabled: false
+      enabled: true
 
 application:
   countQuestionForPass: 3
