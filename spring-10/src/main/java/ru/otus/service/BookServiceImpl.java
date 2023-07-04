@@ -2,9 +2,9 @@ package ru.otus.service;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.otus.converter.BookDtoConverter;
 import ru.otus.dao.BookDao;
 import ru.otus.domain.Author;
@@ -17,7 +17,6 @@ import ru.otus.dto.BookDto;
 public class BookServiceImpl implements BookService {
 
   private final BookDao bookDao;
-
   private final AuthorService authorService;
   private final GenreService genreService;
 
@@ -29,14 +28,14 @@ public class BookServiceImpl implements BookService {
         person, genre, null));
   }
 
-  @Transactional
+  @Transactional(readOnly = true)
   public List<BookDto> getAllBooks() {
     List<Book> books = bookDao.getAll();
     return books.stream().map(BookDtoConverter::convertBookToBookDto)
         .collect(Collectors.toList());
   }
 
-  @Transactional
+  @Transactional(readOnly = true)
   public List<BookDto> getBook(String name) {
     List<Book> books = bookDao.getByName(name);
     return BookDtoConverter.convertBooksToBookDtos(books);

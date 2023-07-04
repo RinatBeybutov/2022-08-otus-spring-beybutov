@@ -28,6 +28,6 @@ public class Author {
     private long id;
     @Column(name = "name")
     private String name;
-    @OneToMany(mappedBy = "author", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "author", fetch = FetchType.LAZY)
     private List<Book> books;
 }
