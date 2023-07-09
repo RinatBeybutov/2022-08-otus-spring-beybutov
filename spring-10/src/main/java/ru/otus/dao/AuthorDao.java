@@ -2,7 +2,6 @@ package ru.otus.dao;
 
 import java.util.List;
 import ru.otus.domain.Author;
-import ru.otus.domain.Book;
 
 public interface AuthorDao {
   int count();

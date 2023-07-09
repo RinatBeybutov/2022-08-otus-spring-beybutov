@@ -15,6 +15,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Table(name = "genres")
@@ -24,11 +26,15 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(of = "id")
 public class Genre {
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
+
   @Column(name = "name")
   private String name;
-  @OneToMany(mappedBy = "genre", fetch = FetchType.EAGER)
+
+  @Fetch(FetchMode.SUBSELECT)
+  @OneToMany(mappedBy = "genre", fetch = FetchType.LAZY)
   private List<Book> book;
 }

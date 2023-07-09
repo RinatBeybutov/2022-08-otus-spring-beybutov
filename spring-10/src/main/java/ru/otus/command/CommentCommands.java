@@ -5,9 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
-import ru.otus.converter.BookDtoConverter;
 import ru.otus.converter.CommentConverter;
-import ru.otus.dto.BookDto;
 import ru.otus.dto.CommentDto;
 import ru.otus.service.CommentService;
 

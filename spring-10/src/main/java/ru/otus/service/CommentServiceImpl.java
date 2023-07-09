@@ -2,7 +2,7 @@ package ru.otus.service;
 
 import java.util.List;
 import javax.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.otus.converter.CommentConverter;
 import ru.otus.dao.BookDaoJpa;
@@ -12,13 +12,11 @@ import ru.otus.domain.Comment;
 import ru.otus.dto.CommentDto;
 
 @Service
+@RequiredArgsConstructor
 public class CommentServiceImpl implements CommentService {
+  private final CommentDaoJpa commentDao;
 
-  @Autowired
-  private CommentDaoJpa commentDao;
-
-  @Autowired
-  private BookDaoJpa bookDao;
+  private final BookDaoJpa bookDao;
 
   @Override
   @Transactional

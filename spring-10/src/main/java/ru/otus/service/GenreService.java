@@ -5,7 +5,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import ru.otus.dao.GenreDao;
-import ru.otus.domain.Book;
 import ru.otus.domain.Genre;
 
 @Service

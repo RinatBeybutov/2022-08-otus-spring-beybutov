@@ -17,7 +17,9 @@ import ru.otus.dto.BookDto;
 public class BookServiceImpl implements BookService {
 
   private final BookDao bookDao;
+
   private final AuthorService authorService;
+
   private final GenreService genreService;
 
   @Transactional
@@ -44,7 +46,7 @@ public class BookServiceImpl implements BookService {
   @Transactional
   public void update(long id, String name) {
     List<Book> books = bookDao.getByName(name);
-    if(books.size() > 0) {
+    if (books.size() > 0) {
       Book book = books.get(0);
       bookDao.updateByName(new Book(book.getId(), name,
           null, null, book.getComments()));
@@ -54,7 +56,7 @@ public class BookServiceImpl implements BookService {
   @Transactional
   public void delete(String name) {
     List<Book> books = bookDao.getByName(name);
-    if(books.size() > 0) {
+    if (books.size() > 0) {
       bookDao.deleteById(books.get(0).getId());
     }
   }

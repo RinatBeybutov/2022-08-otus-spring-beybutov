@@ -3,11 +3,9 @@ package ru.otus.dao;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 import ru.otus.domain.Author;
-import ru.otus.domain.Book;
 
 @Repository
 public class AuthorDaoJpa implements AuthorDao {
@@ -48,11 +46,8 @@ public class AuthorDaoJpa implements AuthorDao {
 
   @Override
   public void deleteById(long id) {
-    Query query = em.createQuery("delete " +
-        "from authors a " +
-        "where a.id = :id");
-    query.setParameter("id", id);
-    query.executeUpdate();
+    Author author = getById(id);
+    em.remove(author);
   }
 
   @Override

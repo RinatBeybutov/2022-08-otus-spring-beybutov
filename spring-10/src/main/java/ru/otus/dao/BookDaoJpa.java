@@ -20,7 +20,7 @@ public class BookDaoJpa implements BookDao {
 
   @Override
   public List<Book> getAll() {
-    return em.createQuery("select b from Book b", Book.class)
+    return em.createQuery("select b from Book b join fetch b.genre join fetch b.author", Book.class)
         .getResultList();
   }
 
@@ -32,7 +32,6 @@ public class BookDaoJpa implements BookDao {
     } else {
       return em.merge(book);
     }
-    //return em.merge(book);
   }
 
   @Override
@@ -42,14 +41,8 @@ public class BookDaoJpa implements BookDao {
 
   @Override
   public void deleteById(long id) {
-    Query commentQuery = em.createQuery("delete from Comment c where c.book.id = :bookId");
-    commentQuery.setParameter("bookId",id);
-    commentQuery.executeUpdate();
-    Query query = em.createQuery("delete " +
-        "from Book b " +
-        "where b.id = :id");
-    query.setParameter("id", id);
-    query.executeUpdate();
+    Book book = getById(id);
+    em.remove(book);
   }
 
   @Override

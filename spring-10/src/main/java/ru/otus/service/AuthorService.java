@@ -6,7 +6,6 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import ru.otus.dao.AuthorDao;
 import ru.otus.domain.Author;
-import ru.otus.domain.Book;
 
 @Service
 @RequiredArgsConstructor

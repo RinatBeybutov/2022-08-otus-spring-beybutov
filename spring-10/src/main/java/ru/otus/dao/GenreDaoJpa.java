@@ -3,7 +3,6 @@ package ru.otus.dao;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 import ru.otus.domain.Genre;
@@ -41,11 +40,8 @@ public class GenreDaoJpa implements GenreDao {
 
   @Override
   public void deleteById(long id) {
-    Query query = em.createQuery("delete " +
-        "from genres g " +
-        "where g.id = :id");
-    query.setParameter("id", id);
-    query.executeUpdate();
+    Genre genre = getById(id);
+    em.remove(genre);
   }
 
   @Override

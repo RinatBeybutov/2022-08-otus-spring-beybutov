@@ -1,7 +1,6 @@
 package ru.otus.dao;
 
 import java.util.List;
-import ru.otus.domain.Book;
 import ru.otus.domain.Genre;
 
 public interface GenreDao {

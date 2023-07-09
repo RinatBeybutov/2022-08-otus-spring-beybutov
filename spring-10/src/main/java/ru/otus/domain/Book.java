@@ -13,16 +13,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-//@Data
 @Entity
 @Table(name = "books")
 @AllArgsConstructor
@@ -38,15 +35,15 @@ public class Book {
   @Column(name = "name")
   private String name;
 
-  @ManyToOne(fetch = FetchType.EAGER)
+  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "id_author")
   private Author author;
 
-  @ManyToOne(fetch = FetchType.EAGER)
+  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "id_genre")
   private Genre genre;
 
   @Fetch(FetchMode.SUBSELECT)
-  @OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
+  @OneToMany(mappedBy = "book", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   private List<Comment> comments;
 }

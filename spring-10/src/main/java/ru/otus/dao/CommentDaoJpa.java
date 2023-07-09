@@ -45,20 +45,14 @@ public class CommentDaoJpa implements CommentDao {
 
   @Override
   public void updateById(String text, long commentId) {
-    Query query = em.createQuery("update Comment c " +
-        "set c.text = :text " +
-        "where c.id = :id");
-    query.setParameter("text", text);
-    query.setParameter("id", commentId);
-    query.executeUpdate();
+    Comment comment = em.find(Comment.class, commentId);
+    comment.setText(text);
+    em.merge(comment);
   }
 
   @Override
   public void deleteById(long id) {
-    Query query = em.createQuery("delete " +
-        "from Comment c " +
-        "where c.id = :id");
-    query.setParameter("id", id);
-    query.executeUpdate();
+    Comment comment = getCommentById(id);
+    em.remove(comment);
   }
 }
