@@ -14,9 +14,12 @@ public class CommentCommands {
 
   private final CommentService commentService;
 
+  private final CommentConverter commentConverter;
+
   @Autowired
-  public CommentCommands(CommentService commentService) {
+  public CommentCommands(CommentService commentService, CommentConverter commentConverter) {
     this.commentService = commentService;
+    this.commentConverter = commentConverter;
   }
 
   @ShellMethod(value = "insert comment command", key = {"insertComment"})
@@ -29,13 +32,13 @@ public class CommentCommands {
   @ShellMethod(value = "get all comments by book id", key = {"getAllComments", "gac"})
   public String getCommentsByBookId(@ShellOption int bookId) {
     List<CommentDto> comments = commentService.getByBookId(bookId);
-    return CommentConverter.commentDtosToStrings(comments);
+    return commentConverter.commentDtosToStrings(comments);
   }
 
   @ShellMethod(value = "get all comments by id", key = {"getComment"})
   public String getCommentById(@ShellOption int commentId) {
     CommentDto comment = commentService.getById(commentId);
-    return CommentConverter.commentDtoToString(comment);
+    return commentConverter.commentDtoToString(comment);
   }
 
   @ShellMethod(value = "update comment", key = {"updateComment", "uc"})

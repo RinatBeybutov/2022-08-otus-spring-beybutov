@@ -14,6 +14,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.dao.EmptyResultDataAccessException;
+import ru.otus.converter.BookDtoConverter;
 import ru.otus.dao.AuthorDaoJpa;
 import ru.otus.dao.BookDaoJpa;
 import ru.otus.dao.GenreDaoJpa;
@@ -23,7 +24,7 @@ import ru.otus.domain.Genre;
 import ru.otus.dto.BookDto;
 
 @DataJpaTest
-@Import({BookServiceImpl.class, AuthorServiceImpl.class, GenreServiceImpl.class})
+@Import({BookServiceImpl.class, AuthorServiceImpl.class, GenreServiceImpl.class, BookDtoConverter.class})
 public class BookServiceTest {
 
   private static final String EXISTED_BOOK_NAME = "War and peace";
@@ -50,7 +51,11 @@ public class BookServiceTest {
     List<Book> mockBook = Arrays.asList(
         new Book(3, NEW_BOOK_NAME, new Author(3, EXISTED_BOOK_AUTHOR_1, null),
             new Genre(3, EXISTED_BOOK_GENRE_1, null), null));
+    List<Genre> mockGenre = Arrays.asList(new Genre(3, EXISTED_BOOK_GENRE_1, null));
+    List<Author> mockAuthor = Arrays.asList(new Author(3, EXISTED_BOOK_AUTHOR_1, null));
     Mockito.when(bookDao.getByName(NEW_BOOK_NAME)).thenReturn(mockBook);
+    Mockito.when(genreDao.getByName(EXISTED_BOOK_GENRE_1)).thenReturn(mockGenre);
+    Mockito.when(authorDao.getByName(EXISTED_BOOK_AUTHOR_1)).thenReturn(mockAuthor);
     bookService.save(expectedBook);
     BookDto actualBook = bookService.getBook(expectedBook.getName()).get(0);
     assertThat(actualBook).usingRecursiveComparison().isEqualTo(expectedBook);
