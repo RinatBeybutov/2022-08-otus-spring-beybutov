@@ -2,12 +2,14 @@ package ru.otus.converter;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.stereotype.Component;
 import ru.otus.domain.Comment;
 import ru.otus.dto.CommentDto;
 
+@Component
 public class CommentConverter {
 
-  public static String commentDtosToStrings(List<CommentDto> comments) {
+  public String commentDtosToStrings(List<CommentDto> comments) {
     StringBuilder builder = new StringBuilder();
     comments.forEach(comment -> {
       builder.append(commentDtoToString(comment) + "\n");
@@ -15,17 +17,17 @@ public class CommentConverter {
     return builder.toString();
   }
 
-  public static List<CommentDto> commentsToCommentDtos(List<Comment> comments) {
+  public List<CommentDto> commentsToCommentDtos(List<Comment> comments) {
     return comments.stream()
         .map(comment -> new CommentDto(comment.getText(), comment.getBook().getId()))
         .collect(Collectors.toList());
   }
 
-  public static String commentDtoToString(CommentDto comment) {
+  public String commentDtoToString(CommentDto comment) {
     return String.format("%s - %s", comment.getBookId(), comment.getText());
   }
 
-  public static CommentDto commentToCommentDto(Comment comment) {
+  public CommentDto commentToCommentDto(Comment comment) {
     return new CommentDto(comment.getText(), comment.getBook().getId());
   }
 }

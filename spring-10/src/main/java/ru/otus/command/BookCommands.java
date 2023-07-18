@@ -14,9 +14,12 @@ public class BookCommands {
 
   private final BookService bookService;
 
+  private final BookDtoConverter bookDtoConverter;
+
   @Autowired
-  public BookCommands(BookService bookService) {
+  public BookCommands(BookService bookService, BookDtoConverter bookDtoConverter) {
     this.bookService = bookService;
+    this.bookDtoConverter = bookDtoConverter;
   }
 
   @ShellMethod(value = "insert book command", key = {"insertBook", "i"})
@@ -30,13 +33,13 @@ public class BookCommands {
   @ShellMethod(value = "get all books", key = {"getAllBooks", "ga"})
   public String getAllBooks() {
     List<BookDto> books = bookService.getAllBooks();
-    return BookDtoConverter.bookDtosToStrings(books);
+    return bookDtoConverter.bookDtosToStrings(books);
   }
 
   @ShellMethod(value = "get book by id", key = {"getBookById", "gi"})
   public String getBookByName(@ShellOption String name) {
     List<BookDto> bookDtos = bookService.getBook(name);
-    return BookDtoConverter.bookDtosToStrings(bookDtos);
+    return bookDtoConverter.bookDtosToStrings(bookDtos);
   }
 
   @ShellMethod(value = "update book", key = {"updateBook", "u"})

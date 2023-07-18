@@ -22,25 +22,27 @@ public class BookServiceImpl implements BookService {
 
   private final GenreService genreService;
 
+  private final BookDtoConverter bookDtoConverter;
+
   @Transactional
   public void save(BookDto book) {
     Genre genre = genreService.getOrCreateGenre(book.getGenre());
     Author person = authorService.getOrCreatePerson(book.getAuthor());
-    bookDao.insert(new Book(-1, book.getName(),
+    bookDao.insert(new Book(0, book.getName(),
         person, genre, null));
   }
 
   @Transactional(readOnly = true)
   public List<BookDto> getAllBooks() {
     List<Book> books = bookDao.getAll();
-    return books.stream().map(BookDtoConverter::convertBookToBookDto)
+    return books.stream().map(bookDtoConverter::convertBookToBookDto)
         .collect(Collectors.toList());
   }
 
   @Transactional(readOnly = true)
   public List<BookDto> getBook(String name) {
     List<Book> books = bookDao.getByName(name);
-    return BookDtoConverter.convertBooksToBookDtos(books);
+    return bookDtoConverter.convertBooksToBookDtos(books);
   }
 
   @Transactional
@@ -48,7 +50,7 @@ public class BookServiceImpl implements BookService {
     List<Book> books = bookDao.getByName(name);
     if (books.size() > 0) {
       Book book = books.get(0);
-      bookDao.updateByName(new Book(book.getId(), name,
+      bookDao.updateById(new Book(book.getId(), name,
           null, null, book.getComments()));
     }
   }

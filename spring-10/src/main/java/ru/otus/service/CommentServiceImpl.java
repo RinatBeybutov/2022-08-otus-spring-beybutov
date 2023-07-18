@@ -1,12 +1,12 @@
 package ru.otus.service;
 
 import java.util.List;
-import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.otus.converter.CommentConverter;
-import ru.otus.dao.BookDaoJpa;
-import ru.otus.dao.CommentDaoJpa;
+import ru.otus.dao.BookDao;
+import ru.otus.dao.CommentDao;
 import ru.otus.domain.Book;
 import ru.otus.domain.Comment;
 import ru.otus.dto.CommentDto;
@@ -14,9 +14,11 @@ import ru.otus.dto.CommentDto;
 @Service
 @RequiredArgsConstructor
 public class CommentServiceImpl implements CommentService {
-  private final CommentDaoJpa commentDao;
+  private final CommentDao commentDao;
 
-  private final BookDaoJpa bookDao;
+  private final BookDao bookDao;
+
+  private final CommentConverter commentConverter;
 
   @Override
   @Transactional
@@ -32,14 +34,14 @@ public class CommentServiceImpl implements CommentService {
   @Transactional
   public List<CommentDto> getByBookId(int bookId) {
     List<Comment> comments = commentDao.getAllByBookId(bookId);
-    return CommentConverter.commentsToCommentDtos(comments);
+    return commentConverter.commentsToCommentDtos(comments);
   }
 
   @Override
   @Transactional
   public CommentDto getById(int commentId) {
     Comment comment = commentDao.getCommentById(commentId);
-    return CommentConverter.commentToCommentDto(comment);
+    return commentConverter.commentToCommentDto(comment);
   }
 
   @Override

@@ -26,7 +26,7 @@ public class BookDaoJpa implements BookDao {
 
   @Override
   public Book insert(Book book) {
-    if (book.getId() <= 0) {
+    if (book.getId() < 0) {
       em.persist(book);
       return book;
     } else {
@@ -62,7 +62,7 @@ public class BookDaoJpa implements BookDao {
   }
 
   @Override
-  public void updateByName(Book book) {
+  public void updateById(Book book) {
     Query query = em.createQuery("update Book b " +
         "set b.name = :name " +
         "where b.id = :id");

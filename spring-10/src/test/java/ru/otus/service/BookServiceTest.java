@@ -10,7 +10,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
@@ -24,7 +23,7 @@ import ru.otus.domain.Genre;
 import ru.otus.dto.BookDto;
 
 @DataJpaTest
-@Import({BookServiceImpl.class, AuthorService.class, GenreService.class})
+@Import({BookServiceImpl.class, AuthorServiceImpl.class, GenreServiceImpl.class})
 public class BookServiceTest {
 
   private static final String EXISTED_BOOK_NAME = "War and peace";

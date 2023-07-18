@@ -40,7 +40,7 @@ public class BookDaoJpaTest {
   void updateBookTest() {
     Book expectedBook = new Book(EXISTING_BOOK_ID, NEW_BOOK_NAME, null,
         null, null);
-    bookDao.updateByName(expectedBook);
+    bookDao.updateById(expectedBook);
     Book actualBook = bookDao.getByName(NEW_BOOK_NAME).get(0);
     assertThat(actualBook.getName()).isEqualTo(NEW_BOOK_NAME);
   }
