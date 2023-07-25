@@ -47,10 +47,9 @@ public class BookServiceImpl implements BookService {
 
   @Transactional
   public void update(long id, String name) {
-    List<Book> books = bookDao.getByName(name);
-    if (books.size() > 0) {
-      Book book = books.get(0);
-      bookDao.updateById(new Book(book.getId(), name,
+    Book book = bookDao.getById(id);
+    if (book != null) {
+      bookDao.updateNameById(new Book(book.getId(), name,
           null, null, book.getComments()));
     }
   }

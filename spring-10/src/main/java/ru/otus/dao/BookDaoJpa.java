@@ -62,7 +62,7 @@ public class BookDaoJpa implements BookDao {
   }
 
   @Override
-  public void updateById(Book book) {
+  public void updateNameById(Book book) {
     Query query = em.createQuery("update Book b " +
         "set b.name = :name " +
         "where b.id = :id");

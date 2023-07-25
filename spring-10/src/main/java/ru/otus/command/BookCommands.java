@@ -36,7 +36,7 @@ public class BookCommands {
     return bookDtoConverter.bookDtosToStrings(books);
   }
 
-  @ShellMethod(value = "get book by id", key = {"getBookById", "gi"})
+  @ShellMethod(value = "get book by name", key = {"getBookByName", "gn"})
   public String getBookByName(@ShellOption String name) {
     List<BookDto> bookDtos = bookService.getBook(name);
     return bookDtoConverter.bookDtosToStrings(bookDtos);

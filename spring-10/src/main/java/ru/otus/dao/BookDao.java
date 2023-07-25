@@ -17,5 +17,5 @@ public interface BookDao {
 
   List<Book> getByName(String name);
 
-  void updateById(Book book);
+  void updateNameById(Book book);
 }

@@ -24,8 +24,8 @@ public class CommentCommands {
 
   @ShellMethod(value = "insert comment command", key = {"insertComment"})
   public String insertBook(@ShellOption String text,
-      @ShellOption int bookId) {
-    commentService.save(new CommentDto(text, bookId));
+      @ShellOption int commentId) {
+    commentService.save(new CommentDto(text, commentId));
     return "коммент сохранен!";
   }
 
@@ -42,14 +42,14 @@ public class CommentCommands {
   }
 
   @ShellMethod(value = "update comment", key = {"updateComment", "uc"})
-  public String updateBook(@ShellOption int commentId,
+  public String updateComment(@ShellOption int commentId,
       @ShellOption String text) {
     commentService.update(commentId, text);
     return "коммент изменена!";
   }
 
   @ShellMethod(value = "delete comment", key = {"deleteComment", "dc"})
-  public String deleteBook(@ShellOption int commentId) {
+  public String deleteComment(@ShellOption int commentId) {
     commentService.delete(commentId);
     return "книга удалена!";
   }

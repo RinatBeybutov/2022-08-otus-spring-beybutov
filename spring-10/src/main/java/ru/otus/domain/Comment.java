@@ -27,7 +27,7 @@ public class Comment {
   @Column(name = "text")
   private String text;
 
-  @ManyToOne(fetch = FetchType.EAGER)
+  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "id_book")
   private Book book;
 }
