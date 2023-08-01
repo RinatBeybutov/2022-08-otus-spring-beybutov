@@ -38,14 +38,14 @@ public class CommentDaoJpaTest {
 
   @Test
   @DisplayName("Вставка коммента")
-  void insertBookTest() {
+  void insertCommentTest() {
     Comment expectedComment = new Comment();
     expectedComment.setText("New expected comment");
     expectedComment.setBook(getExistingBook());
     expectedComment.setId(2);
     commentDao.insert(expectedComment);
 
-    Comment actualComment = commentDao.getCommentById(2);
+    Comment actualComment = em.find(Comment.class, 2);
 
     assertThat(actualComment.getText()).isEqualTo(expectedComment.getText());
   }

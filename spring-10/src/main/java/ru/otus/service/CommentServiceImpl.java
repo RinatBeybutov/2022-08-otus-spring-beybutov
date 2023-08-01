@@ -31,14 +31,14 @@ public class CommentServiceImpl implements CommentService {
   }
 
   @Override
-  @Transactional
+  @Transactional(readOnly = true)
   public List<CommentDto> getByBookId(int bookId) {
     List<Comment> comments = commentDao.getAllByBookId(bookId);
     return commentConverter.commentsToCommentDtos(comments);
   }
 
   @Override
-  @Transactional
+  @Transactional(readOnly = true)
   public CommentDto getById(int commentId) {
     Comment comment = commentDao.getCommentById(commentId);
     return commentConverter.commentToCommentDto(comment);

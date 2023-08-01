@@ -50,7 +50,7 @@ public class BookServiceImpl implements BookService {
     Book book = bookDao.getById(id);
     if (book != null) {
       bookDao.updateNameById(new Book(book.getId(), name,
-          null, null, book.getComments()));
+          null, null, null));
     }
   }
 
